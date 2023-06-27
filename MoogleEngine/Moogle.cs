@@ -87,7 +87,7 @@ public static class Moogle
 
     textSplitter = new float[totalDoc, lengthDataBase];
     
-   Synonyms = JsonSerializer.Deserialize<Dictionary<string, string[]>>(File.ReadAllText("../MoogleEngine/Synonymous.json"))!; 
+   Synonyms = JsonSerializer.Deserialize<Dictionary<string, string[]>>(File.ReadAllText(Path.Combine("..", "MoogleEngine", "Synonymous.json")))!; 
   
   }
 
