@@ -42,13 +42,13 @@ mostrar_informe() {
 
 # Función para mostrar la presentación
 mostrar_presentacion() {
-  if [ ! -f ../Presentacion/presentacion.pdf ]; then
+  if [ ! -f ../Presentación/presentacion.pdf ]; then
     compilar_presentacion
   fi
   if [ $# -eq 0 ]; then
-    start ../Presentacion/presentacion.pdf
+    start ../Presentación/presentacion.pdf
   else
-    "$@" ../Presentacion/presentacion.pdf
+    "$@" ../Presentación/presentacion.pdf
   fi
 }
 
@@ -56,7 +56,7 @@ mostrar_presentacion() {
 limpiar_archivos_auxiliares() {
   cd ../Informe
   latexmk -c
-  cd ../Presentacion
+  cd ../Presentación
   latexmk -c
   cd ../..
   regresar_a_script
