@@ -1,0 +1,184 @@
+\documentclass{beamer}
+
+\usepackage{multicol}
+\usepackage[utf8]{inputenc}
+\usepackage{heuristica}
+\usepackage[T1]{fontenc}
+\usepackage[heuristica,vvarbb,bigdelims]{newtxmath}
+\renewcommand*\oldstylenums[1]{\textosf{#1}}
+\usepackage[sfdefault,scaled=.85]{FiraSans}
+\usepackage{graphicx}
+\usepackage[spanish]{babel} 
+\usepackage[pages=some]{background}
+\pagenumbering{arabic}
+
+%%Se define el "environment" teorema
+\newtheorem{teorema}{StaticMatrix}
+\newtheorem{teo}{QueryVectors}
+
+
+\title{\Huge{Presentación del Proyecto \\ de Programación I: \\ \vspace{0.45cm} \textbf{ MOOGLE!} }}
+\date{\today} 
+\author{Eveliz Espinaco Milián \\ Primer año de Lic. en Ciencia de la Computación \\ Facultad de Matemática y Computación, Universidad de La Habana \\ Curso 2023-2024} 
+
+
+\usetheme{ccm1}
+
+\begin{document}
+%Define el fondo de la primer diapositiva
+{%Inicia el cambio de fondo para la portada
+\setbeamertemplate{background}{
+\includegraphics[width=\the\paperwidth]{images/FONDO_AL_15.png}
+}
+
+\begin{frame}
+  \vspace{-1cm}
+  \titlepage %Necesario para generar la portada
+\end{frame}
+}%aquí termina el cambio de fondo
+
+\begin{frame}
+\tableofcontents %Imprime la tabla de contenido
+\end{frame}
+
+\section{Introducción} %%Título de la sección (Opcional)
+
+\begin{frame}
+  \frametitle{Introducción} 
+  \vspace{-2cm}
+  MOOGLE! está dividida en dos componentes fundamentales:
+  \begin{itemize}
+    \item \textbf{MoogleServer}, un servidor web que renderiza la interfaz gráfica y sirve los resultados.
+    \item \textbf{MoogleEngine}, una \textit{biblioteca de clases} donde está implementada la lógica del algoritmo de búsqueda. \\
+  \end{itemize}
+ 
+  \textit{\underline{Biblioteca de clases:}}
+  \vspace{-0.3cm}
+  \begin{multicols*}{2}
+   
+    \begin{itemize}
+      \item  Moogle
+      \item SearchItem
+      \item SearchResult
+    \end{itemize}
+
+    \begin{itemize}
+      \item StaticMatrix
+      \item QueryVectors
+      \item OperationsVectors
+    \end{itemize} 
+
+  \end{multicols*}
+  
+
+
+\end{frame}
+
+\section{Clase Moogle}
+\begin{frame}{Clase Moogle} %%Otra forma (más corta) de poner el título a la diapositiva
+\vspace{-2.5cm}
+  \textbf{Métodos:}
+  \begin{itemize}
+      \item Query
+      \item OpenDataBase
+      \item Snippet
+    \end{itemize} 
+\end{frame}
+
+\section{Clase StaticMatrix} %%Otra sección
+\begin{frame}
+    \frametitle{Clase StaticMatrix}
+    \vspace{-2.5cm}
+    \begin{teorema} %%Uso del "environment" definido al inicio del documento.
+      Esta clase es la encargada de crear la matriz donde estará toda la información disponible para dar respuesta a la búsqueda.
+    \end{teorema}
+
+    \textbf{\underline{Métodos que la conforman: }} 
+    \begin{itemize}
+      \item ToDoMatrix.
+      \item Cleaner.
+      \item RefillVocabulary.
+      \item RefillMatrix.
+      \item KeyVocabulary.
+    \end{itemize}
+    
+
+\end{frame}
+
+\begin{frame}
+  \vspace{-1cm}
+  \textbf{\underline{Campos de clase: }} 
+ 
+  \begin{itemize}
+    \item Key.
+    \item Vocabulary:
+  \end{itemize}
+
+    \begin{teorema}[\textit{¿CÓMO FUNCIONA? }]
+      Una vez abierto cada documento de la base de datos que se dispone en el array content, este es enviado al método ToDoMatrix de la clase StaticMatrix, este va recorriendo el array e interactuando en cada recorrido con los demás métodos de la clase como se muestra en el esquema: 
+    \end{teorema}
+
+\end{frame}
+
+\begin{frame}
+
+  \begin{figure}[h]
+    \vspace{-1.3cm}
+    \includegraphics[scale= 0.45]{images/uno.png}
+  \end{figure}
+
+\end{frame}
+
+
+\section{Clase QueryVectors}
+\begin{frame}
+  \frametitle{Clase QueryVectors}
+  \vspace{-2.3cm}
+  \begin{teo}
+    Su funcionalidad es la creación de dos vectores: el primero, un fiel seguidor de cada palabra del usuario y el segundo adiciona sinónimos disponibles de los vocablos introducidos. 
+  \end{teo}
+
+  \textbf{\underline{Métodos que la conforman: }} 
+
+\begin{itemize}
+    \item  QueryVector: \((SearchRequests) * log(total\_de\_documentos / (TdocQuery)\) 
+    \item SearchRequests: analiza si el usuario implementó alguna petición, con la utilización de los caracteres: !  $\land$ \(*\)
+    \item TdocQuery. 
+    \item AddSynonyms. 
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \vspace{-1cm}
+  \begin{teo}[\textit{¿CÓMO FUNCIONA? }]
+    Una vez que el usuario introduce una frase de búsqueda esta se envía al método VectorQuery que interactúa con otros métodos como se muestra en el esquema: 
+  \end{teo}
+
+  \begin{figure}[h]
+    \vspace{-0.3cm}
+    \includegraphics[scale= 0.45]{images/dos.png}
+  \end{figure}
+\end{frame}
+
+\section{Clase OperationsVectors}
+\begin{frame}
+  \frametitle{Clase OperationsVectors}
+
+  \vspace{-2cm}
+  \textbf{\underline{Métodos que la conforman: }} 
+
+\begin{itemize}
+    \item Multiplication. 
+  \end{itemize}
+  
+  La matriz \textbf {M{\tiny mxn }} contiene la frecuencia de cada palabra en cada documento, esto se obtiene a través de la fórmula \textbf{a$/$b}, donde \textbf{a} es la cantidad de repeticiones de la palabra en el documento y \textbf{b} la cantidad total de palabras que tiene el documento. \textbf{(TF)} \\
+  \vspace{0.2cm}
+  La matriz \textbf {M{\tiny nx1}} está formada en su mayoría por ceros, solo en la posición que le corresponde a la palabra del query valdrá \textbf{\((SearchRequests) * log(c/d)\)}, donde \textbf{c} es el total de documentos de la base de datos y \textbf{d} la cantidad de documentos que contienen la palabra. \textbf{(IDF)}
+\end{frame}
+
+
+\begin{frame}{Gracias}
+\end{frame}
+
+\end{document}
