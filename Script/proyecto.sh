@@ -23,7 +23,7 @@ compilar_informe() {
 # Función para compilar y generar el PDF de la presentación
 compilar_presentacion() {
   cd ..
-  cd Presentacion
+  cd Presentación
   latexmk -pdf presentacion.tex
   regresar_a_script
 }
